@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUBES TBAt</title>
+    <link rel="stylesheet" href="TUBES.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<style>
+    body {
+        background-color: #171717;
+    }
+</style>
+
+<body>
+    <nav class="wrapper">
+        <div class="brand">
+            <div class="firstname">Lexical Analyzer </div>
+            <div class="lastname">& Parser </div>
+        </div>
+        <ul class="navigasi">
+            <li><a href="https://drive.google.com/file/d/1cWZg5YPm7ZEWVApAYwNo53rfkLIEfTCM/view?usp=sharing">soal</a></li>
+            <li><a href="http://www.google.com" class="aktiv">link</a></li>
+            <li><a href="https://docs.google.com/document/d/1g4-2HIrwbBTHSVW2lETAJESVPbaoAvR5UNuSWFO2Te0/edit?usp=sharing">laporan</a></li>
+            <li><img src="logo.gif" alt="" ...></a></li>
+        </ul>
+    </nav>
+    <div class="container-fluid text-center bg-[#171717] pb-[100px]">
+        <h1 class="text-4xl text-white font-bold mt-20">
+            Teori Bahasa Dan Automata <br>Lexical Analyzer & Parser 
+        </h1>
+        <p class="text-md text-white p-8">
+            Butlah Kalimat Dengan Kata Berikut : lakoe | kamoe | adoe | binoe | bajee <br> 
+            | bate | asee | boh | basoh | poh
+        </p>
+        <div class="container-fluid flex mx-auto justify-center">
+            <form id="form" class="flex space-between mb-5">
+                <input id="sentence" placeholder="Masukkan kalimat yang akan dicek..." type="text"
+                    class="w-[450px] h-[40px] p-3 rounded-md mr-2">
+                <button type="submit" id="checkButton"
+                    class="text-white h-[40px] bg-[#DA0037] px-8 rounded-md">Check</button>
+            </form>
+        </div>
+        <div id="bgResult" class="bg-white w-[570px] mx-auto hidden rounded-md">
+            <h1 id="laTitle" class="hidden">Lexical Analyzer</h1>
+            <span class="mb-5 inline-block" id="resultLa"></span>
+            <h1 id="parserTitle" class="hidden">Parser</h1>
+            <span class="mb-5 inline-block" id="resultParser"></span>
+        </div>
+    </div>
+    <!-- <div class="fContainer">
+
+        <p class="kata">Masukkan Kata Sesuai Dengan Ketentuan Bahasa Aceh</p>
+        <form id="form" class="flex space-between mb-5">
+            <input id="sentence" placeholder="Masukkan kalimat yang akan dicek..." type="text">
+            <button type="submit" id="checkButton" class="text-white sition">Check</button>
+
+        </form>
+        <h1 id="laTitle" class="hidden">Lexical Analyzer</h1>
+        <span class="mb-5 inline-block" id="resultLa"></span>
+        <h1 id="parserTitle" class="hidden">Parser</h1>
+        <span class="mb-5 inline-block" id="resultParser"></span>
+    </div> -->
+
+</body>
+<script src="./script.js"></script>
+
+</html>
