@@ -177,7 +177,6 @@ const checkSentence = (sentence) => {
   if (state == "ACCEPT") {
     resultLa.innerText += "Semua token pada input : " + sentence + ", valid";
     resultLa.style.color = "green";
-  
   }
 };
 
