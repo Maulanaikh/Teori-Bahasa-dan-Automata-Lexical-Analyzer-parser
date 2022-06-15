@@ -177,6 +177,144 @@ const checkSentence = (sentence) => {
   if (state == "ACCEPT") {
     resultLa.innerText += "Semua token pada input : " + sentence + ", valid";
     resultLa.style.color = "green";
+  
+    // Parser
+    parserTitle.className = "block font-medium text-lg";
+    sentence = sentence.replace(/\s+/g, " ").trim();
+    let tokens = sentence.toLowerCase().split(" ");
+    tokens.push("EOS");
+
+    // Symbol definition
+    let nonTerminals = ["S", "NN", "VB"];
+    let terminals = [
+      "lakoe",
+      "kamoe",
+      "adoe",
+      "binoe",
+      "bajee",
+      "bate",
+      "asee",
+      "boh",
+      "basoh",
+      "poh",
+    ];
+
+    // Parse Table
+    let parseTable = {};
+
+    //  kolom S
+    parseTable[["S", "lakoe"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "kamoe"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "adoe"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "binoe"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "bajee"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "bate"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "asee"]] = ["NN", "VB", "NN"];
+    parseTable[["S", "boh"]] = ["error"];
+    parseTable[["S", "basoh"]] = ["error"];
+    parseTable[["S", "poh"]] = ["error"];
+    parseTable[["S", "EOS"]] = ["error"];
+
+    // kolom NN
+    parseTable[["NN", "lakoe"]] = ["lakoe"];
+    parseTable[["NN", "kamoe"]] = ["kamoe"];
+    parseTable[["NN", "adoe"]] = ["adoe"];
+    parseTable[["NN", "binoe"]] = ["binoe"];
+    parseTable[["NN", "bajee"]] = ["bajee"];
+    parseTable[["NN", "bate"]] = ["bate"];
+    parseTable[["NN", "asee"]] = ["asee"];
+    parseTable[["NN", "boh"]] = ["error"];
+    parseTable[["NN", "basoh"]] = ["error"];
+    parseTable[["NN", "poh"]] = ["error"];
+    parseTable[["NN", "EOS"]] = ["error"];
+
+    // kolom VB
+    parseTable[["VB", "lakoe"]] = ["error"];
+    parseTable[["VB", "kamoe"]] = ["error"];
+    parseTable[["VB", "adoe"]] = ["error"];
+    parseTable[["VB", "binoe"]] = ["error"];
+    parseTable[["VB", "bajee"]] = ["error"];
+    parseTable[["VB", "bate"]] = ["error"];
+    parseTable[["VB", "asee"]] = ["error"];
+    parseTable[["VB", "boh"]] = ["boh"];
+    parseTable[["VB", "basoh"]] = ["basoh"];
+    parseTable[["VB", "poh"]] = ["poh"];
+    parseTable[["VB", "EOS"]] = ["error"];
+   
+
+    // Inisialisasi stack
+    let stack = [];
+    stack.push("#");
+    stack.push("S");
+
+    // Input reading initialization
+    let idxToken = 0;
+    let symbol = tokens[idxToken];
+
+    // parsing proses
+    while (stack.length > 0) {
+      let top = stack[stack.length - 1];
+      resultParser.innerText = resultParser.innerText + "Top = " + top + "\n";
+      resultParser.innerText =
+        resultParser.innerText + "Symbol = " + symbol + "\n";
+      if (terminals.includes(top)) {
+        resultParser.innerText =
+          resultParser.innerText + top + " adalah simbol terminal \n";
+        if (top == symbol) {
+          stack.pop();
+          idxToken++;
+          symbol = tokens[idxToken];
+          if (symbol == "EOS") {
+            resultParser.innerText =
+              resultParser.innerText +
+              "Isi stack = " +
+              "[" +
+              stack +
+              "]" +
+              "\n \n";
+            stack.pop();
+          }
+        } else {
+          resultParser.innerText = resultParser.innerText + "error \n \n";
+          break;
+        }
+      } else if (nonTerminals.includes(top)) {
+        resultParser.innerText =
+          resultParser.innerText + top + " adalah simbol non-terminal \n";
+        if (parseTable[[top, symbol]][0] != "error") {
+          stack.pop();
+          let symbolToBePushed = parseTable[[top, symbol]];
+          for (let i = symbolToBePushed.length - 1; i > -1; i--) {
+            stack.push(symbolToBePushed[i]);
+          }
+        } else {
+          resultParser.innerText = resultParser.innerText + "error \n \n";
+          break;
+        }
+      } else {
+        resultParser.innerText = resultParser.innerText + "error \n \n";
+        break;
+      }
+      resultParser.innerText =
+        resultParser.innerText + "Isi stack = " + "[" + stack + "]" + "\n \n";
+    }
+
+    // Conclusion
+    if (symbol == "EOS" && stack.length == 0) {
+      resultParser.innerText =
+        resultParser.innerText +
+        'Input string "' +
+        sentence +
+        '" diterima, sesuai Grammar \n';
+      resultParser.style.color = "green";
+    } else {
+      resultParser.innerText =
+        resultParser.innerText +
+        'Error, input string "' +
+        sentence +
+        '" tidak diterima, tidak sesuai Grammar \n';
+      resultParser.style.color = "red";
+    }
   }
 };
 

@@ -33,6 +33,7 @@
 .firstname{
     color:#DA0037;
     font-weight: 600;
+    
 }
 .lastname{
     color:white;
@@ -42,6 +43,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 .navigasi >li {
     list-style-type: none;
@@ -56,6 +58,7 @@
 .navigasi >li> a:hover{
     color:crimson;
     transition: all .4s ease-in-out;
+  
 }
 .navigasi >li> img{
     width: 55px;
